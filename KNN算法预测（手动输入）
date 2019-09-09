@@ -31,7 +31,7 @@ test = np.array([m, n])
 
 distances = []
 
-for trian_test in x_train:
+for trian_test in x_train:#KNN算法，欧拉公式
   d = sqrt(np.sum((trian_test - test)**2))
   distances.append(d)
 
