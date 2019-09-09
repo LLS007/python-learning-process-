@@ -1,0 +1,54 @@
+import matplotlib.pyplot as plt
+
+import numpy as np
+
+from math import sqrt 
+
+from collections import Counter
+
+raw_data_X = [[3.393533211, 2.331273381],
+              [3.110073483, 1.781539638],
+              [1.343808831, 3.368360954],
+              [3.582294042, 4.679179110],
+              [2.280362439, 2.866990263],
+              [7.423436942, 4.696522875],
+              [5.745051997, 3.533989803],
+              [9.172168622, 2.511101045],
+              [7.792783481, 3.424088941],
+              [7.939820817, 0.791637231]
+             ]
+raw_data_y = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+
+x_train = np.array(raw_data_X)
+
+y_train = np.array(raw_data_y)
+
+
+m = float(input('请输入'))#浮点数的转换
+n = float(input('请输入'))
+
+test = np.array([m, n])
+
+distances = []
+
+for trian_test in x_train:
+  d = sqrt(np.sum((trian_test - test)**2))
+  distances.append(d)
+
+nearest =  np.argsort(distances)
+
+k = 6 
+
+top_Y = [y_train[neighbor] for neighbor in nearest]
+
+voutes = Counter(top_Y)
+
+predict_y = voutes.most_common(1)[0][0]
+
+print(predict_y)
+
+plt.scatter(x_train[y_train ==0,0],x_train[y_train == 0,1],marker='x',color = 'red')
+plt.scatter(x_train[y_train ==1,0],x_train[y_train == 1,1],marker='o',color = 'blue')
+plt.scatter(test[0],test[1],color = 'green')
+
+plt.show()
