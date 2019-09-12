@@ -1,0 +1,67 @@
+import numpy as np  
+
+import matplotlib.pyplot as plt
+
+from sklearn.neighbors import KNeighborsClassifier
+
+raw_x = [[3.393533211, 2.331273381],
+              [3.110073483, 1.781539638],
+              [1.343808831, 3.368360954],
+              [3.582294042, 4.679179110],
+              [2.280362439, 2.866990263],
+              [7.423436942, 4.696522875],
+              [5.745051997, 3.533989803],
+              [9.172168622, 2.511101045],
+              [7.792783481, 3.424088941],
+              [7.939820817, 0.791637231]
+             ]#设定x的参数
+
+raw_y  = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]#设定对应y的参数
+
+
+x_train =  np.array(raw_x)
+y_train =  np.array(raw_y)
+
+#m  = float(input('请输入需要预测的x的值：'))
+#n  = float(input('请输入需要预测的y的值：'))
+
+#test_data = np.array([m,n])
+test_data = np.array([8.093607318, 3.365731514])
+
+knn_classfir = KNeighborsClassifier(n_neighbors=6)
+
+knn_classfir.fit(x_train,y_train)
+
+test_data_predict = test_data.reshape(1,-1)
+
+knn_classfir.predict(test_data_predict)
+
+y_predict =  knn_classfir.predict(test_data_predict)
+
+print(y_predict[0])
+
+#distance = []
+
+#for X_train in x_train:
+   # dt =  sqrt(sum((X_train - test_data)**2))  #欧拉公式的距离
+    # distance.append(dt)
+    
+#nearest_distance = np.argsort(distance)#给距离最近点给出在数据表单中的位置
+
+#k = 6
+
+#top_y = [y_train[neighbor] for neighbor in nearest_distance[:k]]#取到了y的第k个值
+
+#voutes = Counter(top_y)#算出其中的个数
+
+#predict_y = voutes.most_common(1)[0][0]
+
+#print(predict_y)
+
+plt.scatter(x_train[y_train==0,0],x_train[y_train==0,1],color = 'b',marker='o')#对应的行和列
+
+plt.scatter(x_train[y_train==1,0],x_train[y_train==1,1],color='r',marker='*')
+
+plt.scatter(test_data[0],test_data[1],color='g',marker='x')
+
+plt.show()
