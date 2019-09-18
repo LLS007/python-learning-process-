@@ -8,11 +8,13 @@ import random
 import numpy as np 
 import sys
 
-w0 = int(sys.argv[1].split(',')[0])
+list = [sys.argv[1].split(',')]
 
-w1 = int(sys.argv[1].split(',')[1])
+w0 = int(list[0][0][1])
 
-w2 = int(sys.argv[1].split(',')[2])
+w1 = int(list[0][1])
+
+w2 = int(list[0][2][0])
 
 m = int(sys.argv[2])
 
